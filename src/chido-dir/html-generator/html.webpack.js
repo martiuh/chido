@@ -6,6 +6,7 @@ const fs = require('fs')
 const webpackMerge = require('webpack-merge')
 
 const dinasticoShared = require('./html.shared')
+/* eslint-disable-next-line import/no-unresolved */
 const routes = require('../routes/routes.json')
 const sharedConfig = require('../client-webpack/webpack.shared')
 

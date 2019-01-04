@@ -76,6 +76,7 @@ module.exports = {
       }
     ],
     'no-shadow': 0,
+    'import/no-dynamic-require': 0,
     'no-use-before-define': 0,
     'no-param-reassign': 0,
     'react/prop-types': 0,

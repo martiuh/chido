@@ -6,6 +6,7 @@ import nunjucks from 'nunjucks'
 import path from 'path'
 
 import { jsMatch, cssMatch } from '../utils'
+/* eslint-disable-next-line import/no-unresolved, import/extensions */
 import * as syncChunks from '../routes/sync-chunks'
 /* eslint-disable import/no-unresolved */
 import dinasticoRoutes from '../routes/dinastico-routes.json'

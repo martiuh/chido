@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link, Router } from '@reach/router'
 
+/* eslint-disable-next-line import/no-unresolved, import/extensions */
 import syncChunks from '../routes/sync-chunks'
+/* eslint-disable-next-line import/no-unresolved, import/extensions */
 import fileRouter from '../routes/file-router'
 import buildSyncRouter from '../utils/buildSyncRouter'
 

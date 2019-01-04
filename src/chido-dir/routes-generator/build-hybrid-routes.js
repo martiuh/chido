@@ -1,8 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 
+/* eslint-disable import/no-unresolved, import/extensions */
 import * as syncChunks from '../routes/sync-chunks'
 import * as fileRouter from '../routes/file-router'
+/* eslint-enable import/no-unresolved */
 
 // TODO: Make it asynchronous
 // Chunkname with path

@@ -1,3 +1,4 @@
+/* eslint-disable-next-line import/no-unresolved */
 const dinasticoRouter = require('./.routes/dinastico-routes.json')
 
 /*
@@ -10,7 +11,7 @@ const dinasticoRouter = require('./.routes/dinastico-routes.json')
 const dynamicArr = Object.values(dinasticoRouter).filter(({ route }) => !!route)
 
 const regexString = '\\w+'
-const lastRegexString = '\\w+\/?$'
+const lastRegexString = '\\w+/?$'
 
 dynamicArr.forEach(({ route, directory }) => {
   let segments = route.split('/')
