@@ -5,12 +5,12 @@ import { hydrate } from 'react-dom'
 import universal from 'react-universal-component'
 
 /* eslint-disable import/no-unresolved, import/extensions*/
-import asyncChunks from '../routes/async-chunks'
-import dinasticoRoutes from '../routes/dinastico-routes.json'
-import fullRoutes from '../routes/routes.json'
-import fileRouter from '../routes/file-router'
+import asyncChunks from './routes/async-chunks'
+import dinasticoRoutes from './routes/dinastico-routes.json'
+import fullRoutes from './routes/routes.json'
+import fileRouter from './routes/file-router'
 /* eslint-enable import/no-unresolved*/
-import { pick } from '../dinastico-link/reach-utils'
+import { pick } from './reach-utils'
 
 let { pathname } = window.location
 const dinasticoRoot = document.getElementById('__dinastico')

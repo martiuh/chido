@@ -1,7 +1,7 @@
 import React from 'react'
 import universal from 'react-universal-component'
 import { Link, navigate } from '@reach/router'
-import { pick } from './reach-utils'
+import { pick } from '../../app-dir/reach-utils'
 import { isDev } from '../utils'
 
 const getChunkName = to => {

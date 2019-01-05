@@ -82,6 +82,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "git-cz": "^1.8.0",
     "husky": "^1.2.1",
     "rollup": "^1.0.2",
     "webpack-cli": "^3.1.2"
@@ -89,13 +90,14 @@
   "scripts": {
     "analyze:client": "npm run clean && npm run build:client --env ANALYZE",
     "clean": "rimraf public",
-    "lint": "eslint --quiet --fix src",
+    "lint": "eslint --quiet --fix src cli app-dir",
     "build": "npm run clean && npm run build:chunks && npm run build:routes && npm run build:client && npm run build:dinastico",
     "build:chunks": "npm run clean:chunks && node .dinas/routes-generator/build-chunks.js",
     "build:routes": "webpack --mode production --env routing --config .dinas/routes-generator/routes.webpack.js && node .dinas/routes/buildRoutes",
     "build:client": "webpack --mode production --env client --config .dinas/client-webpack/client.webpack.js --colors",
     "build:dinastico": "webpack --mode production --env static --config .dinas/html-generator/html.webpack.js",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "cm": "git-cz"
   },
   "husky": {
     "hooks": {
