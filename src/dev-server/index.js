@@ -14,6 +14,7 @@ const c = require('../../app-dir/socket-constants')
 const DevSocket = require('./DevSocketManager')
 const report = require('./report')
 const buildDinastico = require('../routes-generator/build-chunks')
+
 // check if pagesDir exists in src
 const pagesDir = path.join(process.cwd(), '/src/pages')
 const hasPages = fs.existsSync(pagesDir)
@@ -43,6 +44,7 @@ const httpApp = Server(app)
 DevSocket.init(httpApp)
 
 const Start = () => {
+  console.clear()
   const ws = DevSocket.getSocket()
   const watcher = chokidar.watch(pagesDir)
   watcher
@@ -60,19 +62,19 @@ const Start = () => {
       ws.emit(c.RELOAD)
     })
 
-  httpApp.listen(PORT, () => report.success(`app is running in localhost:${PORT}`))
+  httpApp.listen(PORT, () => report.success(`[chido] app is in localhost:${PORT}`))
 }
 
 const clientCompiler = webpack(clientConfig)
 const devMiddleware = webpackDevMiddleware(clientCompiler, {
-  publicPath
+  publicPath,
+  logLevel: 'trace',
+  stats: 'errors-only'
 })
 
 app.use(devMiddleware)
 devMiddleware.waitUntilValid(Start)
-
 app.use(hotMiddleware(clientCompiler, {
-  log: false,
   path: '/__webpack_hmr',
   heartbeat: 10 * 1000
 }))

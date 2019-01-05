@@ -21,7 +21,7 @@ module.exports = {
   },
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, '../../public/'),
+    path: path.join(process.cwd(), '/public/'),
     publicPath: '/',
     filename: '[name].js'
   },
