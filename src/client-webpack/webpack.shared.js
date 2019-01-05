@@ -10,7 +10,8 @@ const babelOptions = require('../babelOptions')
 
 module.exports = function webpackShared(env, argv) {
   let userConfig = {}
-  const configPath = path.join(__dirname, '../../dinastico.config.js')
+  const processRoot = process.cwd()
+  const configPath = path.join(processRoot, 'dinastico.config.js')
   if (fs.existsSync(configPath)) {
     const { webpackConfig } = require(configPath)
     if (typeof webpackConfig === 'function') {
