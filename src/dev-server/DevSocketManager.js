@@ -1,4 +1,4 @@
-const c = require('../../chido-app/socket-constants')
+const c = require('../../app-dir/socket-constants')
 
 class DevSocketClass {
   constructor() {

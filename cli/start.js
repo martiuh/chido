@@ -1,21 +1,20 @@
 const fse = require('fs-extra')
 
 module.exports = async function Start(argv) {
-  console.clear()
   // First copy chido-dir to .chido in the root of the app
   const processDir = process.cwd()
-  const chidoDir = `${__dirname}/../chido-app/`
-  const chidoDirExists = await fse.pathExists(chidoDir)
-  if (!chidoDirExists) {
+  const appDir = `${__dirname}/../app-dir/`
+  const appDirExists = await fse.pathExists(appDir)
+  if (!appDirExists) {
     throw new Error('There\'s a problem with your "chido" installation, please "npm uninstall chido" and then run "npm install chido" again!!!')
   }
 
   const dotAppDir = `${processDir}/.app`
   const dotAppDirExists = await fse.pathExists(dotAppDir)
-  // if (dotChidoDirExists) {
-  //   rimraf.sync(dotChidoDir)
+  // if (dotappDirExists) {
+  //   rimraf.sync(dotappDir)
   // }
 
-  await fse.copy(chidoDir, dotAppDir)
+  await fse.copy(appDir, dotAppDir)
   require('../src/dev-server')
 }

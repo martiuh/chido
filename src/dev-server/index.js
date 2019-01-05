@@ -10,7 +10,7 @@ const fs = require('fs')
 
 const webpackConfig = require('../client-webpack/client.webpack')
 const jsMatch = require('../utils/jsMatch')
-const c = require('../../chido-app/socket-constants')
+const c = require('../../app-dir/socket-constants')
 const DevSocket = require('./DevSocketManager')
 const report = require('./report')
 const buildDinastico = require('../routes-generator/build-chunks')
