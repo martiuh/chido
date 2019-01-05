@@ -13,7 +13,6 @@ if (!fs.existsSync(routesDir)) {
 }
 
 const buildDinastico = () => {
-  const routesDir = path.join(currentDir, '.app')
   const pagePath = path.join(currentDir, '/src/pages')
   let importChunks = ''
   let requireChunks = ''
@@ -40,9 +39,9 @@ const buildDinastico = () => {
   requireChunks = `module.exports = {${requireChunks}\n}
   `
   fileRouter = `module.exports = {${fileRouter}\n}`
-  fs.writeFileSync(`${routesDir}/async-chunks.js`, importChunks)
-  fs.writeFileSync(`${routesDir}/sync-chunks.js`, requireChunks)
-  fs.writeFileSync(`${routesDir}/file-router.js`, fileRouter)
+  fs.writeFileSync(`${currentDir}/.app/routes/async-chunks.js`, importChunks)
+  fs.writeFileSync(`${currentDir}/.app/routes/sync-chunks.js`, requireChunks)
+  fs.writeFileSync(`${currentDir}/.app/routes/file-router.js`, fileRouter)
   return files
 }
 

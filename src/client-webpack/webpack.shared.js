@@ -6,12 +6,12 @@ const merge = require('webpack-merge')
 const fs = require('fs')
 const webpack = require('webpack')
 
-const babelOptions = require('../babelOptions')
+const babelOptions = require('./babel-loader.options')
 
 module.exports = function webpackShared(env, argv) {
   let userConfig = {}
   const processRoot = process.cwd()
-  const configPath = path.join(processRoot, 'dinastico.config.js')
+  const configPath = path.join(processRoot, 'chido.config.js')
   if (fs.existsSync(configPath)) {
     const { webpackConfig } = require(configPath)
     if (typeof webpackConfig === 'function') {
@@ -26,6 +26,7 @@ module.exports = function webpackShared(env, argv) {
         {
           test: /\.jsx?$/,
           loader: 'babel-loader',
+          exclude: /node_modules/,
           options: babelOptions
         }
       ]

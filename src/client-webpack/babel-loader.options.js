@@ -1,5 +1,4 @@
 module.exports = {
-  comments: true,
   presets: [
     '@babel/preset-react',
     ['@babel/preset-env', {
