@@ -1,13 +1,11 @@
 // Only one entry point
-const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const ExtractCSSChunks = require('extract-css-chunks-webpack-plugin')
 
 const sharedConfig = require('./webpack.shared')
 const devConfig = require('./webpack.dev')
-const wpProduction = require('./webpack.production')
-
+const productionConfig = require('./webpack.production')
 
 const baseConfig = (env, argv, envWebpack) => {
   const isDev = argv.mode === 'development'
@@ -45,9 +43,9 @@ const baseConfig = (env, argv, envWebpack) => {
 
 module.exports = function webpackConfig(env, argv) {
   const dev = devConfig
-  const production = wpProduction(env, argv)
   let config = null
   if (argv.mode === 'production') {
+    const production = productionConfig(env, argv)
     config = baseConfig(env, argv, production)
   }
   else {

@@ -5,7 +5,7 @@ import { Link, Router } from '@reach/router'
 import syncChunks from '../routes/sync-chunks'
 /* eslint-disable-next-line import/no-unresolved, import/extensions */
 import fileRouter from '../routes/file-router'
-import buildSyncRouter from '../utils/buildSyncRouter'
+import buildSyncRouter from '../buildSyncRouter'
 
 const FourOFour = () => (
   <div>
@@ -19,7 +19,6 @@ const Chunknames = Object.keys(syncChunks)
 const SyncChunksArr = Object.values(syncChunks)
 
 function DevRouter() {
-  console.log('Rendering Router')
   return (
     <Router>
       {SyncChunksArr.map((sync, index) => {

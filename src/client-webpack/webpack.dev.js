@@ -7,15 +7,16 @@ const nunjucks = require('nunjucks')
 const fs = require('fs')
 
 const devTemplatePath = path.join(__dirname, 'dev-template.html')
-
+const templatePath = path.join(__dirname, '../default-html/index.html')
 rimraf.sync(devTemplatePath)
-const template = nunjucks.render(path.resolve(__dirname, '../default-html/index.html'))
+const templateString = fs.readFileSync(templatePath).toString()
+const template = nunjucks.renderString(templateString)
 fs.writeFileSync(devTemplatePath, template)
 module.exports = {
   entry: {
     bundle: [
       'webpack-hot-middleware/client?__webpack_hmr&reload=true&overlay=true',
-      path.join(__dirname, '../dev-renderer/dev-renderer')
+      path.join(process.cwd(), '/.app/dev-renderer/dev-renderer')
     ]
   },
   mode: 'development',
@@ -26,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './dev-template.html')
+      template: path.resolve(devTemplatePath)
     }),
     new WriteFilePlugin(),
     new webpack.HotModuleReplacementPlugin()

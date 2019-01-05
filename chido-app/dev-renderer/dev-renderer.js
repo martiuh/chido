@@ -3,7 +3,7 @@ import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import socketIo from 'socket.io-client'
 import { render } from 'react-dom'
-import c from '../dev-server/socket-constants'
+import c from '../socket-constants'
 
 import DevRouter from './DevRouter'
 

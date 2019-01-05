@@ -6,6 +6,8 @@ const merge = require('webpack-merge')
 const fs = require('fs')
 const webpack = require('webpack')
 
+const babelOptions = require('../babelOptions')
+
 module.exports = function webpackShared(env, argv) {
   let userConfig = {}
   const configPath = path.join(__dirname, '../../dinastico.config.js')
@@ -17,12 +19,13 @@ module.exports = function webpackShared(env, argv) {
   }
 
   const config = {
-    context: path.join(__dirname, '../../'),
+    context: process.cwd(),
     module: {
       rules: [
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: babelOptions
         }
       ]
       // No .css here please

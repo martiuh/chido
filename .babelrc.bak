@@ -2,9 +2,12 @@
   "comments": true,
   "presets": [
     "@babel/preset-react",
-    ["@babel/preset-env", {
-      "modules": "umd"
-    }]
+    [
+      "@babel/preset-env", 
+      {
+        "modules": "umd"
+      }
+    ]
   ],
   "plugins": [
     "universal-import",

@@ -8,20 +8,21 @@ const hotMiddleware = require('webpack-hot-middleware')
 const chokidar = require('chokidar')
 const fs = require('fs')
 
+const webpackConfig = require('../client-webpack/client.webpack')
 const jsMatch = require('../utils/jsMatch')
-const c = require('./socket-constants')
+const c = require('../../chido-app/socket-constants')
 const DevSocket = require('./DevSocketManager')
 const report = require('./report')
-const webpackConfig = require('../client-webpack/client.webpack')
 const buildDinastico = require('../routes-generator/build-chunks')
 // check if pagesDir exists in src
-const pagesDir = path.resolve(__dirname, '../../src/pages')
+const pagesDir = path.join(process.cwd(), '/src/pages')
 const hasPages = fs.existsSync(pagesDir)
 if (!hasPages) {
   report.failure('make sure ./src/pages folder exists')
 }
 
 const clientConfig = webpackConfig(null, { mode: 'development' })
+
 const { publicPath } = clientConfig.output
 const outputPath = clientConfig.output.path
 const PORT = process.env.PORT || 3030
@@ -32,7 +33,7 @@ try {
   initialPages = buildDinastico() // This is synchronous
 }
 catch (e) {
-  report.failure('cannot build dinastico router')
+  report.failure('cannot build dinastico router', new Error(e))
 }
 
 report.success('router build!!!')
