@@ -16,5 +16,7 @@ module.exports = async function Start(argv) {
   // }
 
   await fse.copy(appDir, dotAppDir)
+
+  const copiedSuccess = await fse.pathExists(dotAppDir)
   require('../src/dev-server')
 }

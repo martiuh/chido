@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
   const clientProduction = {
     devtool: 'source-map',
     entry: {
-      bundle: path.join(__dirname, '../production-renderer/production-renderer.js')
+      bundle: path.join(__dirname, '../production-renderer.js')
     },
     output: {
       path: path.resolve(__dirname, '../../public'),

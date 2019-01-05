@@ -16,7 +16,7 @@ module.exports = {
   entry: {
     bundle: [
       'webpack-hot-middleware/client?__webpack_hmr&reload=true&overlay=true',
-      path.join(process.cwd(), '/.app/dev-renderer/dev-renderer')
+      path.join(process.cwd(), '/.app/dev-renderer.js')
     ]
   },
   mode: 'development',

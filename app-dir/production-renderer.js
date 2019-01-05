@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link, Router } from '@reach/router'
-import axios from 'axios'
+import { Router } from '@reach/router'
 import { hydrate } from 'react-dom'
 import universal from 'react-universal-component'
 
