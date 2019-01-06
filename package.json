@@ -1,8 +1,8 @@
 {
   "name": "chido",
-  "version": "0.5.72",
+  "version": "0.5.73",
   "description": "Hybrid static site generator based on react",
-  "main": "lib/cli",
+  "main": "lib/cli/index.js",
   "author": "Tona González <martiuh@gmail.com>",
   "repository": {
     "type": "git",
@@ -10,10 +10,10 @@
   },
   "license": "MIT",
   "bin": {
-    "chido": "lib/cli"
+    "chido": "lib/cli/index.js"
   },
   "files": [
-    "lib/"
+    "lib/**"
   ],
   "private": false,
   "dependencies": {
