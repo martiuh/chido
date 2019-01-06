@@ -7,6 +7,7 @@ module.exports = {
   ],
   plugins: [
     'universal-import',
+    '@babel/plugin-transform-runtime',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-classes'

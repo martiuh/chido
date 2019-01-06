@@ -1,6 +1,6 @@
 {
   "name": "chido",
-  "version": "0.5.73",
+  "version": "0.5.76",
   "description": "Hybrid static site generator based on react",
   "main": "lib/cli/index.js",
   "author": "Tona González <martiuh@gmail.com>",
@@ -13,6 +13,7 @@
     "chido": "lib/cli/index.js"
   },
   "files": [
+    "app-dir/**",
     "lib/**"
   ],
   "private": false,
@@ -21,6 +22,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-classes": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@hot-loader/react-dom": "^16.7.0",
@@ -91,7 +93,7 @@
     "analyze:client": "npm run clean && npm run build:client --env ANALYZE",
     "clean": "rimraf public",
     "lint": "eslint --quiet --fix src app-dir",
-    "build": "babel src --out-dir lib",
+    "build": "rimraf lib && babel src --out-dir lib && node copyDefaultHtml.js",
     "build:chunks": "npm run clean:chunks && node .dinas/routes-generator/build-chunks.js",
     "build:routes": "webpack --mode production --env routing --config .dinas/routes-generator/routes.webpack.js && node .dinas/routes/buildRoutes",
     "build:client": "webpack --mode production --env client --config .dinas/client-webpack/client.webpack.js --colors",
