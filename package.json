@@ -1,6 +1,6 @@
 {
   "name": "chido",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Hybrid static site generator based on react",
   "main": "lib/cli/index.js",
   "author": "Tona González <martiuh@gmail.com>",
