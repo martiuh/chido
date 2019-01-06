@@ -2,7 +2,7 @@
   "name": "chido",
   "version": "0.5.6",
   "description": "Hybrid static site generator based on react",
-  "main": "cli/index.js",
+  "main": "lib/cli/index.js",
   "author": "Tona González <martiuh@gmail.com>",
   "repository": {
     "type": "git",
@@ -10,11 +10,10 @@
   },
   "license": "MIT",
   "bin": {
-    "chido": "cli/index.js"
+    "chido": "lib/cli/index.js"
   },
   "private": false,
   "dependencies": {
-    "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -72,6 +71,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.1.2",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-alias": "^1.1.1",
@@ -87,8 +87,8 @@
   "scripts": {
     "analyze:client": "npm run clean && npm run build:client --env ANALYZE",
     "clean": "rimraf public",
-    "lint": "eslint --quiet --fix src cli app-dir",
-    "build": "npm run clean && npm run build:chunks && npm run build:routes && npm run build:client && npm run build:dinastico",
+    "lint": "eslint --quiet --fix src app-dir",
+    "build": "babel src --out-dir lib",
     "build:chunks": "npm run clean:chunks && node .dinas/routes-generator/build-chunks.js",
     "build:routes": "webpack --mode production --env routing --config .dinas/routes-generator/routes.webpack.js && node .dinas/routes/buildRoutes",
     "build:client": "webpack --mode production --env client --config .dinas/client-webpack/client.webpack.js --colors",
