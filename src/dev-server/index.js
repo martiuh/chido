@@ -80,4 +80,7 @@ app.use(hotMiddleware(clientCompiler, {
 }))
 
 app.use(publicPath, express.static(outputPath))
-app.use('/*', (req, res) => res.sendFile(path.resolve(__dirname, '../../public/index.html')))
+
+const wildCardHtml = path.join(process.cwd(), '/public/index.html')
+console.log({ wildCardHtml })
+app.use('/*', (req, res) => res.sendFile(wildCardHtml))

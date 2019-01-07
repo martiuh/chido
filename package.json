@@ -1,6 +1,6 @@
 {
   "name": "chido",
-  "version": "0.5.76",
+  "version": "0.5.77",
   "description": "Hybrid static site generator based on react",
   "main": "lib/cli/index.js",
   "author": "Tona González <martiuh@gmail.com>",
@@ -93,7 +93,9 @@
     "analyze:client": "npm run clean && npm run build:client --env ANALYZE",
     "clean": "rimraf public",
     "lint": "eslint --quiet --fix src app-dir",
-    "build": "rimraf lib && babel src --out-dir lib && node copyDefaultHtml.js",
+    "prepublish": "npm run build",
+    "build": "rimraf lib && node copyDefaultHtml.js && babel src --out-dir lib",
+    "watch": "rimraf lib && node copyDefaultHtml.js && babel src --out-dir lib --watch --verbose",
     "build:chunks": "npm run clean:chunks && node .dinas/routes-generator/build-chunks.js",
     "build:routes": "webpack --mode production --env routing --config .dinas/routes-generator/routes.webpack.js && node .dinas/routes/buildRoutes",
     "build:client": "webpack --mode production --env client --config .dinas/client-webpack/client.webpack.js --colors",
