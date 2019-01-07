@@ -13,7 +13,7 @@ const jsMatch = require('../utils/jsMatch')
 const c = require('../../app-dir/socket-constants')
 const DevSocket = require('./DevSocketManager')
 const report = require('./report')
-const buildDinastico = require('../routes-generator/build-chunks')
+const buildchido = require('../routes-generator/build-chunks')
 
 // check if pagesDir exists in src
 const pagesDir = path.join(process.cwd(), '/src/pages')
@@ -31,10 +31,10 @@ const PORT = process.env.PORT || 3030
 report.event('building router')
 let initialPages = []
 try {
-  initialPages = buildDinastico() // This is synchronous
+  initialPages = buildchido() // This is synchronous
 }
 catch (e) {
-  report.failure('cannot build dinastico router', new Error(e))
+  report.failure('cannot build chido router', new Error(e))
 }
 
 report.success('router build!!!')
@@ -52,13 +52,13 @@ const Start = () => {
       file = slash(file)
       if (!initialPages.includes(file) && jsMatch(file)) {
         report.event(`${file} was added`)
-        initialPages = buildDinastico()
+        initialPages = buildchido()
         ws.emit(c.RELOAD)
       }
     })
     .on('unlink', file => {
       report.warn(`${file} was removed`)
-      initialPages = buildDinastico()
+      initialPages = buildchido()
       ws.emit(c.RELOAD)
     })
 
@@ -82,5 +82,5 @@ app.use(hotMiddleware(clientCompiler, {
 app.use(publicPath, express.static(outputPath))
 
 const wildCardHtml = path.join(process.cwd(), '/public/index.html')
-console.log({ wildCardHtml })
+
 app.use('/*', (req, res) => res.sendFile(wildCardHtml))

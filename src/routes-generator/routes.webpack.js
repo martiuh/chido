@@ -4,9 +4,9 @@ const webpack = require('webpack')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const webpackMerge = require('webpack-merge')
 const sharedConfig = require('../client-webpack/webpack.shared')
-const dinasticoShared = require('../html-generator/html.shared')
+const chidoShared = require('../html-generator/html.shared')
 
-module.exports = function dinasticoWebpack(env, argv) {
+module.exports = function chidoWebpack(env, argv) {
   const config = {
     target: 'node',
     node: {
@@ -34,5 +34,5 @@ module.exports = function dinasticoWebpack(env, argv) {
 
   const shared = sharedConfig(env, argv)
   shared.module.rules = shared.module.rules.filter(({ test }) => String(test) !== String(/\.css$/))
-  return webpackMerge.smart(shared, config, dinasticoShared)
+  return webpackMerge.smart(shared, config, chidoShared)
 }

@@ -9,21 +9,21 @@ import { jsMatch, cssMatch } from '../utils'
 /* eslint-disable-next-line import/no-unresolved, import/extensions */
 import * as syncChunks from '../routes/sync-chunks'
 /* eslint-disable import/no-unresolved */
-import dinasticoRoutes from '../routes/dinastico-routes.json'
+import chidoRoutes from '../routes/chido-routes.json'
 import fullRoutes from '../routes/routes.json'
 import stats from '../../public/stats.json'
 /* eslint-enable import/no-unresolved */
 
-const dinasticoStats = stats.assetsByChunkName
+const chidoStats = stats.assetsByChunkName
 
-// import dinasticoRoutes from './dinasticoRoutes'
+// import chidoRoutes from './chidoRoutes'
 // 1. Get Pages
 // 2. Make routes according to filename
 
 export default function (locals) {
   const { routes, template } = locals
   const chunkName = fullRoutes[locals.path] // The name of the component
-  const chunkFiles = dinasticoStats[chunkName]
+  const chunkFiles = chidoStats[chunkName]
 
   const organizeChunks = arr => {
     const js = []
@@ -55,7 +55,7 @@ export default function (locals) {
 
   let js = []
   let css = []
-  Object.keys(dinasticoStats).forEach(chunk => {
+  Object.keys(chidoStats).forEach(chunk => {
     let validChunk = null
     chunk.split('~').forEach(c => {
       if (validChunk) {
@@ -65,15 +65,15 @@ export default function (locals) {
       return null
     })
     if (validChunk) {
-      const validChunksArr = dinasticoStats[validChunk]
+      const validChunksArr = chidoStats[validChunk]
       const fullChunks = organizeChunks(validChunksArr)
       js = [...js, ...fullChunks.js]
       css = [...css, ...fullChunks.css]
     }
   })
   const addPath = value => `/${value}`
-  const bundleChunks = organizeChunks(dinasticoStats.bundle) // webpack bundle
-  const bootstrapChunk = organizeChunks(dinasticoStats.bootstrap) // app bootstrap
+  const bundleChunks = organizeChunks(chidoStats.bundle) // webpack bundle
+  const bootstrapChunk = organizeChunks(chidoStats.bootstrap) // app bootstrap
   let jsArr = [...js, ...bootstrapChunk.js, ...bundleChunks.js]
   jsArr = jsArr.filter(value => !!value)
   jsArr = jsArr.map(addPath)
@@ -94,7 +94,7 @@ export default function (locals) {
   const url = locals.path
   const Component = syncChunks[chunkName].default
   let Url = url === '/index' ? '/' : url
-  Url = dinasticoRoutes[url] ? dinasticoRoutes[url].routeName : Url
+  Url = chidoRoutes[url] ? chidoRoutes[url].routeName : Url
   const App = () => (
     <ServerLocation url={url}>
       <Router baseuri='/'>

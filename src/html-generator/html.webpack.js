@@ -5,19 +5,19 @@ const webpack = require('webpack')
 const fs = require('fs')
 const webpackMerge = require('webpack-merge')
 
-const dinasticoShared = require('./html.shared')
+const chidoShared = require('./html.shared')
 /* eslint-disable-next-line import/no-unresolved */
 const routes = require('../routes/routes.json')
 const sharedConfig = require('../client-webpack/webpack.shared')
 
 const paths = Object.keys(routes)
 
-module.exports = function dinasticoWebpack(env, argv) {
+module.exports = function ChidoWebpack(env, argv) {
   const config = {
     mode: 'production',
     entry: path.resolve(__dirname, 'build.js'),
     output: {
-      filename: '.dinastico__hidden.js',
+      filename: '.chido__hidden.js',
       path: path.join(__dirname, '../../public'),
       libraryTarget: 'umd',
       globalObject: 'this'
@@ -44,5 +44,5 @@ module.exports = function dinasticoWebpack(env, argv) {
 
   const shared = sharedConfig(env, argv)
   shared.module.rules = shared.module.rules.filter(({ test }) => String(test) !== String(/\.css$/))
-  return webpackMerge.smart(shared, config, dinasticoShared)
+  return webpackMerge.smart(shared, config, chidoShared)
 }

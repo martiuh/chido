@@ -12,7 +12,7 @@ if (!fs.existsSync(routesDir)) {
   fs.mkdirSync(routesDir)
 }
 
-const buildDinastico = () => {
+const buildchido = () => {
   const pagePath = path.join(currentDir, '/src/pages')
   let importChunks = ''
   let requireChunks = ''
@@ -45,7 +45,7 @@ const buildDinastico = () => {
   return files
 }
 
-module.exports = buildDinastico
+module.exports = buildchido
 if (require.main === module) {
-  buildDinastico()
+  buildchido()
 }

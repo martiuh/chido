@@ -8,14 +8,14 @@ import c from './socket-constants'
 import DevRouter from './DevRouter'
 
 const socket = socketIo()
-socket.on(c.READY, () => console.log('[dinastico] socket connection enabled'))
+socket.on(c.READY, () => console.log('[chido] socket connection enabled'))
 socket.on(c.RELOAD, () => {
-  console.log('[dinastico] reloading app')
+  console.log('[chido] reloading app')
   window.location.reload()
 })
 
 
-const appRoot = document.getElementById('__dinastico')
+const appRoot = document.getElementById('__chido')
 
 const renderApp = App => render(
   <AppContainer>

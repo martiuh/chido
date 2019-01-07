@@ -11,9 +11,9 @@ import * as fileRouter from '../routes/file-router'
 const Pages = Object.values(syncChunks)
 const PagesNames = Object.keys(syncChunks)
 
-const dinasticoRoutes = () => {
+const chidoRoutes = () => {
   let fullRouter = {}
-  let dinasticoRouter = {}
+  let chidoRouter = {}
 
   Pages.forEach((P, index) => {
     if (!P.default) {
@@ -115,7 +115,7 @@ const dinasticoRoutes = () => {
         fullRouter = Object.assign({}, fullRouter, { [noIndexRoute]: chunkName })
       }
       else {
-        dinasticoRouter = Object.assign({}, dinaRouter, dinasticoRouter)
+        chidoRouter = Object.assign({}, dinaRouter, chidoRouter)
         fullRouter = Object.assign({}, fullRouter, componentRoutes)
       }
     }
@@ -123,11 +123,11 @@ const dinasticoRoutes = () => {
 
   const currentDir = process.cwd()
   fs.writeFileSync(path.join(__dirname, '../routes/routes.json'), JSON.stringify(fullRouter, null, '\t'))
-  fs.writeFileSync(path.join(__dirname, '../routes/dinastico-routes.json'), JSON.stringify(dinasticoRouter, null, '\t'))
+  fs.writeFileSync(path.join(__dirname, '../routes/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
 }
 
-export default dinasticoRoutes
+export default chidoRoutes
 
 if (require.main === module) {
-  dinasticoRoutes()
+  chidoRoutes()
 }

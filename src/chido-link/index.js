@@ -31,7 +31,7 @@ const tryPrefetch = to => {
   return importFn
 }
 
-export default function DinasticoLink(props) {
+export default function ChidoLink(props) {
   const {
     to,
     onClick,

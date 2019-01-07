@@ -35,8 +35,7 @@ module.exports = function webpackShared(env, argv) {
     resolve: {
       extensions: ['.js', '.css', '.scss', '.sass', '.jsx'],
       alias: {
-        'react-dom': '@hot-loader/react-dom',
-        'dinastico-link': path.resolve(__dirname, '../dinastico-link')
+        'react-dom': '@hot-loader/react-dom'
       }
     },
     plugins: [

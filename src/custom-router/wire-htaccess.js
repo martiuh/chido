@@ -1,5 +1,5 @@
 /* eslint-disable-next-line import/no-unresolved */
-const dinasticoRouter = require('./.routes/dinastico-routes.json')
+const chidoRouter = require('./.routes/chido-routes.json')
 
 /*
   Fulfill these use cases:
@@ -8,7 +8,7 @@ const dinasticoRouter = require('./.routes/dinastico-routes.json')
   2. /product/:productId/photos
     The desired route for `/product/iphone-4/` and `/product/iphone-4/photos
 */
-const dynamicArr = Object.values(dinasticoRouter).filter(({ route }) => !!route)
+const dynamicArr = Object.values(chidoRouter).filter(({ route }) => !!route)
 
 const regexString = '\\w+'
 const lastRegexString = '\\w+/?$'

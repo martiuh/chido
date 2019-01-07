@@ -5,15 +5,15 @@ import universal from 'react-universal-component'
 
 /* eslint-disable import/no-unresolved, import/extensions*/
 import asyncChunks from './routes/async-chunks'
-import dinasticoRoutes from './routes/dinastico-routes.json'
+import chidoRoutes from './routes/chido-routes.json'
 import fullRoutes from './routes/routes.json'
 import fileRouter from './routes/file-router'
 /* eslint-enable import/no-unresolved*/
 import { pick } from './reach-utils'
 
 let { pathname } = window.location
-const dinasticoRoot = document.getElementById('__dinastico')
-const routesArr = Object.values(dinasticoRoutes)
+const chidoRoot = document.getElementById('__chido')
+const routesArr = Object.values(chidoRoutes)
 window.__asyncChunks = asyncChunks
 window.__fullRoutes = fullRoutes
 window.__dynamicRoutes = routesArr.filter(dina => !!dina.route)
@@ -41,12 +41,12 @@ if (thePage && thePage.load) {
       {chunksArr.map(chunk => {
         let routePath = fileRouter[chunk]
         routePath = routePath === 'index/' ? '/' : routePath
-        routePath = dinasticoRoutes[routePath] ? `${routePath}*` : routePath
+        routePath = chidoRoutes[routePath] ? `${routePath}*` : routePath
         const importFunction = asyncChunks[chunk]
         const AsyncRoute = universal(importFunction)
         return <AsyncRoute path={routePath} key={chunk} />
       })}
     </Router>,
-    dinasticoRoot
+    chidoRoot
   )
 }
