@@ -14,8 +14,7 @@ todo: check [TODO.MD](TODO.MD) for the ***Road to Alpha***
 ```jsx
 // .src/pages/movies.js
 import React from 'react'
-import { Router } from '@reach/router'
-import { Link } from 'chido'
+import { Router, Link } from 'chido'
 
 const MoviesList = () => (
   <main>
