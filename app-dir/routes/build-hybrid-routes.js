@@ -2,16 +2,14 @@ import fs from 'fs'
 import path from 'path'
 
 /* eslint-disable import/no-unresolved, import/extensions */
-import * as syncChunks from '../routes/sync-chunks'
-import * as fileRouter from '../routes/file-router'
-/* eslint-enable import/no-unresolved */
+import * as syncChunks from './sync-chunks'
+import * as fileRouter from './file-router'
+/* eslint-enable import/no-unresolved, import/extensions */
 
-// TODO: Make it asynchronous
-// Chunkname with path
 const Pages = Object.values(syncChunks)
 const PagesNames = Object.keys(syncChunks)
 
-const chidoRoutes = () => {
+function chidoRoutes() {
   let fullRouter = {}
   let chidoRouter = {}
 
@@ -110,7 +108,7 @@ const chidoRoutes = () => {
     if (Component.props.children) {
       const componentRoutes = routeMaker(Component, routeName, {})
       const dinaRouter = routeMaker(Component, routeName, {}, true)
-      // console.log(routeMaker(Component, routeName, {}, 'router'))
+
       if (!componentRoutes[routeName]) {
         fullRouter = Object.assign({}, fullRouter, { [noIndexRoute]: chunkName })
       }
@@ -121,13 +119,12 @@ const chidoRoutes = () => {
     }
   })
 
-  const currentDir = process.cwd()
-  fs.writeFileSync(path.join(__dirname, '../routes/routes.json'), JSON.stringify(fullRouter, null, '\t'))
-  fs.writeFileSync(path.join(__dirname, '../routes/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
+  // remember this file is in the .app/routes directory
+  fs.writeFileSync(path.join(__dirname, '/routes.json'), JSON.stringify(fullRouter, null, '\t'))
+  fs.writeFileSync(path.join(__dirname, '/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
 }
-
-export default chidoRoutes
 
 if (require.main === module) {
   chidoRoutes()
 }
+module.exports = chidoRoutes

@@ -1,15 +1,16 @@
 // RUN all the React components in the pages folder and build a Router
+const fse = require('fs-extra')
 const fs = require('fs')
 const path = require('path')
 const slash = require('slash')
 const kebabCase = require('lodash/kebabCase')
 
-const jsMatch = require('../utils/jsMatch')
+const jsMatch = require('../../app-dir/utils/jsMatch')
 
 const currentDir = process.cwd()
 const routesDir = path.join(currentDir, '/.app/routes')
 if (!fs.existsSync(routesDir)) {
-  fs.mkdirSync(routesDir)
+  fse.ensureDirSync(routesDir)
 }
 
 const buildchido = () => {

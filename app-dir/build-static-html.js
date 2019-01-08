@@ -3,16 +3,14 @@ import { renderToString } from 'react-dom/server'
 import { ServerLocation, Router } from '@reach/router'
 import Helmet from 'react-helmet'
 import nunjucks from 'nunjucks'
-import path from 'path'
 
-import { jsMatch, cssMatch } from '../utils'
-/* eslint-disable-next-line import/no-unresolved, import/extensions */
-import * as syncChunks from '../routes/sync-chunks'
-/* eslint-disable import/no-unresolved */
-import chidoRoutes from '../routes/chido-routes.json'
-import fullRoutes from '../routes/routes.json'
-import stats from '../../public/stats.json'
-/* eslint-enable import/no-unresolved */
+import { jsMatch, cssMatch } from './utils'
+/* eslint-disable import/no-unresolved, import/extensions */
+import * as syncChunks from './routes/sync-chunks'
+import chidoRoutes from './routes/chido-routes.json'
+import fullRoutes from './routes/routes.json'
+import stats from '../public/stats.json'
+/* eslint-enable import/no-unresolved, import/extensions */
 
 const chidoStats = stats.assetsByChunkName
 
@@ -59,7 +57,7 @@ export default function (locals) {
     let validChunk = null
     chunk.split('~').forEach(c => {
       if (validChunk) {
-        return
+        return null
       }
       validChunk = c === chunkName ? chunk : null
       return null

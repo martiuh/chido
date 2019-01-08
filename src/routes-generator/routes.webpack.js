@@ -13,10 +13,10 @@ module.exports = function chidoWebpack(env, argv) {
       __dirname: false
     },
     mode: 'production',
-    entry: path.resolve(__dirname, 'build-hybrid-routes.js'),
+    entry: path.join(process.cwd(), '/.app/routes/build-hybrid-routes.js'),
     output: {
       filename: 'buildRoutes.js',
-      path: path.join(__dirname, '../routes')
+      path: path.join(process.cwd(), '/.app/routes/')
     },
     plugins: [
       new WriteFilePlugin(),

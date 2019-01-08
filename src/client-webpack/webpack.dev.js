@@ -12,6 +12,7 @@ rimraf.sync(devTemplatePath)
 const templateString = fs.readFileSync(templatePath).toString()
 const template = nunjucks.renderString(templateString)
 fs.writeFileSync(devTemplatePath, template)
+
 module.exports = {
   entry: {
     bundle: [

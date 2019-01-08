@@ -9,10 +9,10 @@ const chokidar = require('chokidar')
 const fs = require('fs')
 
 const webpackConfig = require('../client-webpack/client.webpack')
-const jsMatch = require('../utils/jsMatch')
+const jsMatch = require('../../app-dir/utils/jsMatch')
 const c = require('../../app-dir/socket-constants')
 const DevSocket = require('./DevSocketManager')
-const report = require('./report')
+const report = require('../report')
 const buildchido = require('../routes-generator/build-chunks')
 
 // check if pagesDir exists in src
@@ -28,7 +28,7 @@ const { publicPath } = clientConfig.output
 const outputPath = clientConfig.output.path
 const PORT = process.env.PORT || 3030
 
-report.event('building router')
+report.info('building router')
 let initialPages = []
 try {
   initialPages = buildchido() // This is synchronous
@@ -51,7 +51,7 @@ const Start = () => {
     .on('add', file => {
       file = slash(file)
       if (!initialPages.includes(file) && jsMatch(file)) {
-        report.event(`${file} was added`)
+        report.info(`${file} was added`)
         initialPages = buildchido()
         ws.emit(c.RELOAD)
       }

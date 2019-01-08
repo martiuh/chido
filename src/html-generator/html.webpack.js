@@ -7,18 +7,18 @@ const webpackMerge = require('webpack-merge')
 
 const chidoShared = require('./html.shared')
 /* eslint-disable-next-line import/no-unresolved */
-const routes = require('../routes/routes.json')
 const sharedConfig = require('../client-webpack/webpack.shared')
 
-const paths = Object.keys(routes)
-
 module.exports = function ChidoWebpack(env, argv) {
+  const rawRoutes = fs.readFileSync(path.join(process.cwd(), '/.app/routes/routes.json'))
+  const routes = JSON.parse(rawRoutes.toString())
+  const paths = Object.keys(routes)
   const config = {
     mode: 'production',
-    entry: path.resolve(__dirname, 'build.js'),
+    entry: path.join(process.cwd(), '/.app/build-static-html.js'),
     output: {
       filename: '.chido__hidden.js',
-      path: path.join(__dirname, '../../public'),
+      path: path.join(process.cwd(), '/public'),
       libraryTarget: 'umd',
       globalObject: 'this'
     },
@@ -34,7 +34,7 @@ module.exports = function ChidoWebpack(env, argv) {
         maxChunks: 1
       }),
       new webpack.DefinePlugin({
-        IS_SERVER: true,
+        IS_STATIC: true,
         'process.env': {
           NODE_ENV: JSON.stringify('production')
         }

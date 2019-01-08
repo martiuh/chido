@@ -2,7 +2,7 @@ import React from 'react'
 import universal from 'react-universal-component'
 import { Link, navigate } from '@reach/router'
 import { pick } from '../../app-dir/reach-utils'
-import { isDev } from '../utils'
+import { isDev } from '../../app-dir/utils'
 
 const getChunkName = to => {
   let simpleTo = to[0] === '/' && to !== '/' ? to.substr(1) : to
