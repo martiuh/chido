@@ -1,12 +1,13 @@
 const fse = require('fs-extra')
 const rimraf = require('rimraf')
+const slash = require('slash')
 
 const buildChunks = require('../routes-generator/build-chunks')
 const report = require('../report')
 
 module.exports = async function ensureDirs() {
   const processDir = process.cwd()
-  const appDir = `${__dirname}/../../app-dir/`
+  const appDir = slash(`${__dirname}/../../app-dir/`)
   report.info('searching for app-dir')
   const appDirExists = await fse.pathExists(appDir)
 
@@ -16,7 +17,7 @@ module.exports = async function ensureDirs() {
 
   report.success('app-dir exists')
   report.info('copying app-dir to .app')
-  const dotAppDir = `${processDir}/.app`
+  const dotAppDir = slash(`${processDir}/.app`)
   const dotAppDirExists = await fse.pathExists(dotAppDir)
   if (dotAppDirExists) {
     rimraf.sync(dotAppDir)
@@ -31,5 +32,14 @@ module.exports = async function ensureDirs() {
   buildChunks()
   report.success('chunks built!!!')
 
-  return copiedSuccess
+  report.info('searching for public directory')
+  const publicDir = slash(`${processDir}/public`)
+  const publicDirExists = await fse.pathExists(publicDir)
+  if (publicDirExists) {
+    report.info('removing public directory')
+    rimraf.sync(publicDir)
+  }
+  await fse.ensureDir(publicDir)
+  report.success('brand new public directory')
+  return true
 }
