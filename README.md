@@ -3,9 +3,6 @@
 
 **current:** alpha
 
-todo: check [TODO.MD](TODO.MD) for the ***Road to Alpha***
-
-
 ### Installation
 ```sh
 #npm
