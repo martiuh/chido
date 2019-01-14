@@ -3,8 +3,8 @@
 - ~~`dinastico-link` tries to guess if the dynamic url is part of our routing strategy~~, 
 - ~~Build a file or folder for each route in our app (for faster first print)~~
 - ~~Support for `react-helmet`~~
-- Create a Wrapper React Component where to enable redux, context, or any *wrapping* required
-- prefetch a `404.html` when the router doesn't know the path
+- ~~prefetch a `404.html` when the router doesn't know the path~~
+- ~~Make a default `404.js` when no custom `404` is supplied~~
 
 - Development features:
   - ~~webpack-dev-middleware instead of webpack-dev-server~~
@@ -20,6 +20,7 @@
 
 **Road to 0.6.0**
 - ~~Expose webpack.config to the client~~
+- Create a Wrapper React Component where to enable redux, context, or any *wrapping* required
 - Build the router considering `pages` directory has recursively folders with `.js` files.
 - `dinastico-link` prefetches on keyPress
 - detect when component changes class to function or viceversa

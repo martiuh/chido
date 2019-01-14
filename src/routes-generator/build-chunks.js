@@ -5,6 +5,7 @@ const path = require('path')
 const slash = require('slash')
 const kebabCase = require('lodash/kebabCase')
 
+const report = require('../report/index')
 const jsMatch = require('../../app-dir/utils/jsMatch')
 
 const currentDir = process.cwd()
@@ -15,13 +16,20 @@ if (!fs.existsSync(routesDir)) {
 
 const buildchido = () => {
   const pagePath = path.join(currentDir, '/src/pages')
+  if (!fse.existsSync(pagePath)) {
+    return report.failure('make sure you have a working /src/pages')
+  }
+
   let importChunks = ''
   let requireChunks = ''
   let fileRouter = ''
   const files = []
-  fs.readdirSync(pagePath).forEach(P => {
+  const filesArr = fs.readdirSync(pagePath)
+  const default404 = path.join(currentDir, '/.app/404/default-404.js')
+  const has404 = !!filesArr.find(P => P === '404.js')
+  filesArr.forEach(P => {
     if (jsMatch(P)) {
-      const fullPath = slash(path.resolve(currentDir, pagePath, P))
+      const fullPath = slash(path.join(pagePath, P))
       files.push(fullPath)
       const chunkName = `site--pages-${kebabCase(P)}`
       importChunks = `${importChunks}
@@ -34,6 +42,18 @@ const buildchido = () => {
       "${chunkName}": "${P.split('.js')[0]}/",`
     }
   })
+
+  if (!has404) {
+    const chunkName404 = `site--pages-${kebabCase('404.js')}`
+    importChunks = `${importChunks}
+      "${chunkName404}": import("${default404}"/* webpackChunkName: "${chunkName404}" */),`
+
+    requireChunks = `${requireChunks}
+      "${chunkName404}": require("${slash(default404)}"),`
+
+    fileRouter = `${fileRouter}
+      "${chunkName404}": "404/",`
+  }
 
   importChunks = `module.exports = {${importChunks}\n}
   `

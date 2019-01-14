@@ -7,13 +7,6 @@ import syncChunks from './routes/sync-chunks'
 import fileRouter from './routes/file-router'
 import buildSyncRouter from './buildSyncRouter'
 
-const FourOFour = () => (
-  <div>
-    404 Not Found
-    <Link to='/'>Go to home</Link>
-  </div>
-)
-
 // Here I only get where I shall use the path/* pattern
 const Chunknames = Object.keys(syncChunks)
 const SyncChunksArr = Object.values(syncChunks)
@@ -30,6 +23,7 @@ function DevRouter() {
         const SyncComp = sync
         let defaultPath = fileRouter[Chunknames[index]]
         defaultPath = defaultPath === 'index/' ? '/' : defaultPath
+        defaultPath = defaultPath === '404/' ? '*' : defaultPath
         let Page = ''
         if (Comp.prototype.render) {
           Page = new Comp() //
@@ -45,7 +39,6 @@ function DevRouter() {
         }
         return <SyncComp key={defaultPath} path={defaultPath} />
       })}
-      <FourOFour path='*' />
     </Router>
   )
 }
