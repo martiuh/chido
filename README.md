@@ -3,9 +3,25 @@
 
 **current:** alpha
 
-todo: check [TODO.MD](TODO.MD) for the ***Road to Alpha***
+### Installation
+```sh
+#npm
+npm install chido react
 
+#yarn
+yarn add chido react
 
+## for now react-dom is included in the chido package
+
+```
+### package.json
+
+```json
+"scripts":{
+  "start": "chido start",
+  "build": "chido build"
+}
+```
 ## **How does it work?**
 `chido` reads all the `.js` files in the `./src/pages` directory (a very common pattern in static site generators) and builds a static site from them, if you want you can also export a `@reach/router` component from  and `chido` will build an `.html` file for each `Router` or `React` component and since it supports code-splitting for `.js` and `.css` (incluidng `.sass` and `.scss`) the first print is really fast.
 

@@ -1,4 +1,4 @@
-## Goals to alpha
+## Goals to 0.6.0
 - ~~Programatically build a **production** Router from the src/pages folder~~
 - ~~`dinastico-link` tries to guess if the dynamic url is part of our routing strategy~~, 
 - ~~Build a file or folder for each route in our app (for faster first print)~~
@@ -18,9 +18,10 @@
   - php
     - Build an automatic `AltoRouter` with each dynamic url
 
-**Road to 0.6.0**
+**Beyond 0.6.0**
 - ~~Expose webpack.config to the client~~
 - Create a Wrapper React Component where to enable redux, context, or any *wrapping* required
 - Build the router considering `pages` directory has recursively folders with `.js` files.
-- `dinastico-link` prefetches on keyPress
-- detect when component changes class to function or viceversa
+- `dinastico-link` prefetches on keyHover (?)
+- Detect when component changes class to function or viceversa
+- Make an static `jsx` router for production.
