@@ -31,13 +31,13 @@ const tryPrefetch = to => {
   return importFn
 }
 
-export default function ChidoLink(props) {
+export default function ChidoLink(fullprops) {
   const {
     to,
     onClick,
     onMouseEnter,
-    ...rest
-  } = props
+    ...props
+  } = fullprops
   return (
     <Link
       to={to}
@@ -50,16 +50,26 @@ export default function ChidoLink(props) {
       }}
       onClick={event => {
         onClick && onClick(event)
-        event.preventDefault()
-        const importFn = tryPrefetch(to)
-        if (importFn) {
-          universal(importFn).preload().then(() => navigate(to))
-        }
-        else {
-          navigate(to)
+        if (
+          event.button === 0// ignore right clicks
+          && !props.target // let browser handle "target=_blank"
+          && !event.defaultPrevented // onClick prevented default
+          && !event.metaKey // ignore clicks with modifier keys...
+          && !event.altKey
+          && !event.ctrlKey
+          && !event.shiftKey
+        ) {
+          event.preventDefault()
+          const importFn = tryPrefetch(to)
+          if (importFn) {
+            universal(importFn).preload().then(() => navigate(to))
+          }
+          else {
+            navigate(to)
+          }
         }
       }}
-      {...rest}
+      {...props}
     />
   )
 }
