@@ -1,6 +1,7 @@
 import React from 'react'
 import universal from 'react-universal-component'
 import { Link, navigate } from '@reach/router'
+
 import { pick } from '../../app-dir/reach-utils'
 import { isDev } from '../../app-dir/utils'
 
@@ -62,6 +63,7 @@ export default function ChidoLink(fullprops) {
           event.preventDefault()
           const importFn = tryPrefetch(to)
           if (importFn) {
+            // What happen if the promise gets rejected?
             universal(importFn).preload().then(() => navigate(to))
           }
           else {

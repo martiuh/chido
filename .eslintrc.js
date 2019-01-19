@@ -47,16 +47,6 @@ module.exports = {
     IS_SERVER: true
   },
   rules: {
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        js: 'never',
-        jsx: 'never',
-        styl: 'never',
-        css: 'never'
-      }
-    ],
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
@@ -112,14 +102,6 @@ module.exports = {
         allowShortCircuit: true,
         allowTernary: true,
         allowTaggedTemplates: true
-      }
-    ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-        optionalDependencies: true,
-        peerDependencies: true
       }
     ],
     'comma-dangle': [
