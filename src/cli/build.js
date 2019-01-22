@@ -28,7 +28,8 @@ module.exports = async function build(argv) {
     report.success()
 
     report.info('build routes from emitted file')
-    require(`${process.cwd()}/.app/routes/buildRoutes`)
+    const buildRoutes = require(`${process.cwd()}/.app/routes/buildRoutes`)
+    buildRoutes()
     report.success()
 
     report.info('build client app')
