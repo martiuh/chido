@@ -9,7 +9,7 @@ import * as fileRouter from './file-router'
 const Pages = Object.values(syncChunks)
 const PagesNames = Object.keys(syncChunks)
 
-function chidoRoutes() {
+function buildHybridRoutes() {
   let fullRouter = {}
   let chidoRouter = {}
 
@@ -124,7 +124,4 @@ function chidoRoutes() {
   fs.writeFileSync(path.join(__dirname, '/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
 }
 
-if (require.main === module) {
-  chidoRoutes()
-}
-module.exports = chidoRoutes
+module.exports = buildHybridRoutes

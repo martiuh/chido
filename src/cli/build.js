@@ -18,6 +18,7 @@ const promiseWebpack = config => new Promise((resolve, reject) => {
 })
 
 module.exports = async function build(argv) {
+  const currentDir = process.cwd()
   const copiedSuccess = await ensureDirs()
   if (!copiedSuccess) {
     report.failure('cannot copy the directories')
@@ -28,7 +29,7 @@ module.exports = async function build(argv) {
     report.success()
 
     report.info('build routes from emitted file')
-    const buildRoutes = require(`${process.cwd()}/.app/routes/buildRoutes`)
+    const { buildRoutes } = require(`${currentDir}/.app/routes/buildRoutes`)
     buildRoutes()
     report.success()
 

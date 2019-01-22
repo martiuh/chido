@@ -15,6 +15,8 @@ module.exports = function chidoWebpack(env, argv) {
     mode: 'production',
     entry: path.join(process.cwd(), '/.app/routes/build-hybrid-routes.js'),
     output: {
+      libraryTarget: 'commonjs',
+      library: 'buildRoutes',
       filename: 'buildRoutes.js',
       path: path.join(process.cwd(), '/.app/routes/')
     },

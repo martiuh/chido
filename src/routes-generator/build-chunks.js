@@ -67,3 +67,6 @@ const buildchido = () => {
 }
 
 module.exports = buildchido
+if (require.main === module) {
+  buildchido()
+}
