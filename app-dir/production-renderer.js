@@ -32,6 +32,10 @@ if (!siteChunk) {
   }
 }
 
+const Mock = ({ key }) => (
+  <h1>{key}</h1>
+)
+
 const thePage = asyncChunks[siteChunk]
 if (thePage && thePage.load) {
   const chunksArr = Object.keys(fileRouter)
@@ -43,8 +47,9 @@ if (thePage && thePage.load) {
         routePath = routePath === 'index/' ? '/' : routePath
         routePath = chidoRoutes[routePath] ? `${routePath}*` : routePath
         const importFunction = asyncChunks[chunk]
-        const AsyncRoute = universal(importFunction)
-        return <AsyncRoute path={routePath} key={chunk} />
+        // const AsyncRoute = universal(importFunction)
+        // return <AsyncRoute path={routePath} key={chunk} />
+        return <Mock key={chunk} />
       })}
     </Router>,
     chidoRoot
