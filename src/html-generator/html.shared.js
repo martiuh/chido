@@ -1,5 +1,8 @@
 /*
-  This webpack configuration is shared between html-generator and routes-generator
+  This webpack configuration is shared between
+  html-generator and routes-generator
+  it should be handled as a server side rendering
+  configuration
  */
 module.exports = {
   module: {

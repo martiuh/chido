@@ -1,6 +1,8 @@
 /*
-  This webpack configuration is shared between client-webpack, html-generator and routes-generator
+  This webpack configuration is shared between
+  client-webpack, html-generator and routes-generator
  */
+const FriendlyErrorsWebpack = require('friendly-errors-webpack-plugin')
 const path = require('path')
 const merge = require('webpack-merge')
 const fs = require('fs')
@@ -27,7 +29,7 @@ module.exports = function webpackShared(env, argv) {
           test: /\.jsx?$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
-          options: babelOptions
+          options: babelOptions()
         }
       ]
       // No .css here please
@@ -41,7 +43,8 @@ module.exports = function webpackShared(env, argv) {
     plugins: [
       new webpack.DefinePlugin({
         STATIC: JSON.stringify(env === 'static')
-      })
+      }),
+      new FriendlyErrorsWebpack()
     ]
   }
   return merge.smart(config, userConfig)

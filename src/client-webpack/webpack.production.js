@@ -4,13 +4,14 @@ const { StatsWriterPlugin } = require('webpack-stats-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = (env, argv) => {
+  const currentDir = process.cwd()
   const clientProduction = {
     devtool: 'source-map',
     entry: {
-      bundle: path.join(process.cwd(), '/.app/production-renderer.js')
+      bundle: path.join(currentDir, '/.app/production-renderer.js')
     },
     output: {
-      path: path.join(process.cwd(), '/public/'),
+      path: path.join(currentDir, '/public/'),
       publicPath: '/',
       filename: '[name]-[chunkhash].js'
     },

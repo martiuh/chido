@@ -20,7 +20,7 @@ const promiseWebpack = config => new Promise((resolve, reject) => {
 module.exports = async function build(argv) {
   const copiedSuccess = await ensureDirs()
   if (!copiedSuccess) {
-    report.failure('shite')
+    report.failure('cannot copy the directories')
   }
   try {
     report.info('making routes file with webpack')
@@ -32,6 +32,7 @@ module.exports = async function build(argv) {
     report.success()
 
     report.info('build client app')
+    console.log(clientWebpack('client', { mode: 'production' }).module.rules)
     await promiseWebpack(clientWebpack('client', { mode: 'production' }))
     report.success()
 
