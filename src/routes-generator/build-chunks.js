@@ -25,7 +25,7 @@ const buildchido = () => {
   let fileRouter = ''
   const files = []
   const filesArr = fs.readdirSync(pagePath)
-  const default404 = path.join(currentDir, '/.app/404/default-404.js')
+  const default404 = slash(path.join(currentDir, '/.app/404/default-404.js'))
   const has404 = !!filesArr.find(P => P === '404.js')
   filesArr.forEach(P => {
     if (jsMatch(P)) {

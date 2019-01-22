@@ -15,11 +15,17 @@ cli
     `,
     handler: argv => start(argv),
     builder: b => {
-      b.option('p', {
-        alias: 'port',
+      b.option('port', {
+        alias: 'p',
         type: 'string',
         default: '3030',
         describe: 'Set development server port. "default: 3030"'
+      })
+      b.option('routing', {
+        alias: 'r',
+        type: 'string',
+        default: 'htaccess',
+        describe: 'Set the routing strategy for your htaccess. "default: htaccess"'
       })
     }
   })

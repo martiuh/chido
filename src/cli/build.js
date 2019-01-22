@@ -5,6 +5,7 @@ const report = require('../report')
 const routesWebpack = require('../routes-generator/routes.webpack')
 const clientWebpack = require('../client-webpack/client.webpack')
 const staticHtmlWebpack = require('../html-generator/html.webpack')
+const wireHtaccess = require('../custom-router/wire-htaccess')
 
 const promiseWebpack = config => new Promise((resolve, reject) => {
   webpack(config, (err, stats = { compilation: {} }) => {
@@ -16,7 +17,7 @@ const promiseWebpack = config => new Promise((resolve, reject) => {
   })
 })
 
-module.exports = async function Build(argv) {
+module.exports = async function build(argv) {
   const copiedSuccess = await ensureDirs()
   if (!copiedSuccess) {
     report.failure('shite')
@@ -31,13 +32,17 @@ module.exports = async function Build(argv) {
     report.success()
 
     report.info('build client app')
-    const clientStats = await promiseWebpack(clientWebpack('client', { mode: 'production' }))
+    await promiseWebpack(clientWebpack('client', { mode: 'production' }))
     report.success()
 
     report.info('build static html')
-    const staticStats = await promiseWebpack(staticHtmlWebpack('static', { mode: 'production' }))
+    await promiseWebpack(staticHtmlWebpack('static', { mode: 'production' }))
     report.success()
 
+    report.info('using htaccess')
+    const router = await wireHtaccess()
+    console.log({ router })
+    report.success()
     report.chido('your app is production ready!!!')
   }
   catch (error) {
