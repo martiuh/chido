@@ -26,7 +26,6 @@ module.exports = async function build(argv) {
   try {
     report.info('making routes file with webpack')
     const routesStats = await promiseWebpack(routesWebpack('routing', { mode: 'production' }))
-    console.log({ routesStats })
     report.success()
 
     report.info('build routes from emitted file')
