@@ -25,7 +25,8 @@ function chidoRoutes() {
     if (Page.prototype.isReactComponent) {
       Component = new Page()
       Component = Component.render()
-    } else {
+    }
+    else {
       Component = Page()
     }
     if (!Component) {
@@ -46,7 +47,8 @@ function chidoRoutes() {
           obj.children.forEach(child => {
             routeObj = routeMaker(child, currentRoute, routeObj, dina)
           })
-        } else {
+        }
+        else {
           routeObj = routeMaker(obj.children, currentRoute, routeObj, dina)
         }
       }
@@ -66,7 +68,8 @@ function chidoRoutes() {
         path = path === '/' ? '' : `${path}/`
         if (dina === 'router') {
           routeObj[`${routeName}*`] = true
-        } else if (dina) {
+        }
+        else if (dina) {
           routeObj[`${currentRoute}${path}`] = {
             routeName: `${routeName}*`,
             dynamic: hasDots,
@@ -74,7 +77,8 @@ function chidoRoutes() {
             chunkName,
             directory: `${currentRoute}${path}`
           }
-        } else {
+        }
+        else {
           routeObj[`${currentRoute}${path}`] = chunkName
         }
       }
@@ -84,9 +88,11 @@ function chidoRoutes() {
           obj.props.forEach(prop => {
             routeObj = routeMaker(prop, currentRoute, routeObj, dina)
           })
-        } else if (obj.props.path && !obj.props.children) {
+        }
+        else if (obj.props.path && !obj.props.children) {
           buildPath(obj.props.path)
-        } else if (obj.props.path && obj.props.children) {
+        }
+        else if (obj.props.path && obj.props.children) {
           buildPath(obj.props.path)
           routeObj = routeMaker(
             obj.props,
@@ -94,7 +100,8 @@ function chidoRoutes() {
             routeObj,
             dina
           )
-        } else {
+        }
+        else {
           routeObj = routeMaker(obj.props, currentRoute, routeObj, dina)
         }
       }
@@ -111,7 +118,8 @@ function chidoRoutes() {
         fullRouter = Object.assign({}, fullRouter, {
           [noIndexRoute]: chunkName
         })
-      } else {
+      }
+      else {
         chidoRouter = Object.assign({}, dinaRouter, chidoRouter)
         fullRouter = Object.assign({}, fullRouter, componentRoutes)
       }
