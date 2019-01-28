@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-unused-expressions */
-
 const cli = require('yargs')
 const start = require('./start')
 const build = require('./build')
-
-console.clear()
 
 cli
   .command({

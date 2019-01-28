@@ -22,11 +22,10 @@ function chidoRoutes() {
     if (!Page.prototype) {
       return null
     }
-    if (Page.prototype.render) {
+    if (Page.prototype.isReactComponent) {
       Component = new Page()
       Component = Component.render()
-    }
-    else {
+    } else {
       Component = Page()
     }
     if (!Component) {
@@ -47,8 +46,7 @@ function chidoRoutes() {
           obj.children.forEach(child => {
             routeObj = routeMaker(child, currentRoute, routeObj, dina)
           })
-        }
-        else {
+        } else {
           routeObj = routeMaker(obj.children, currentRoute, routeObj, dina)
         }
       }
@@ -60,14 +58,15 @@ function chidoRoutes() {
 
         const dotsPath = path
         const hasDots = startsWithDots(path)
-        currentRoute = finalSlash(currentRoute) ? currentRoute : `${currentRoute}/`
+        currentRoute = finalSlash(currentRoute)
+          ? currentRoute
+          : `${currentRoute}/`
         path = finalSlash(path) ? path : path.substr(0, path.length)
         path = hasDots ? `${path.substr(1)}` : path
         path = path === '/' ? '' : `${path}/`
         if (dina === 'router') {
           routeObj[`${routeName}*`] = true
-        }
-        else if (dina) {
+        } else if (dina) {
           routeObj[`${currentRoute}${path}`] = {
             routeName: `${routeName}*`,
             dynamic: hasDots,
@@ -75,8 +74,7 @@ function chidoRoutes() {
             chunkName,
             directory: `${currentRoute}${path}`
           }
-        }
-        else {
+        } else {
           routeObj[`${currentRoute}${path}`] = chunkName
         }
       }
@@ -86,17 +84,17 @@ function chidoRoutes() {
           obj.props.forEach(prop => {
             routeObj = routeMaker(prop, currentRoute, routeObj, dina)
           })
-        }
-
-        else if (obj.props.path && !obj.props.children) {
+        } else if (obj.props.path && !obj.props.children) {
           buildPath(obj.props.path)
-        }
-
-        else if (obj.props.path && obj.props.children) {
+        } else if (obj.props.path && obj.props.children) {
           buildPath(obj.props.path)
-          routeObj = routeMaker(obj.props, `${currentRoute}${obj.props.path}`, routeObj, dina)
-        }
-        else {
+          routeObj = routeMaker(
+            obj.props,
+            `${currentRoute}${obj.props.path}`,
+            routeObj,
+            dina
+          )
+        } else {
           routeObj = routeMaker(obj.props, currentRoute, routeObj, dina)
         }
       }
@@ -110,9 +108,10 @@ function chidoRoutes() {
       const dinaRouter = routeMaker(Component, routeName, {}, true)
 
       if (!componentRoutes[routeName]) {
-        fullRouter = Object.assign({}, fullRouter, { [noIndexRoute]: chunkName })
-      }
-      else {
+        fullRouter = Object.assign({}, fullRouter, {
+          [noIndexRoute]: chunkName
+        })
+      } else {
         chidoRouter = Object.assign({}, dinaRouter, chidoRouter)
         fullRouter = Object.assign({}, fullRouter, componentRoutes)
       }
@@ -120,8 +119,14 @@ function chidoRoutes() {
   })
 
   // remember this file is in the .app/routes directory
-  fs.writeFileSync(path.join(__dirname, '/routes.json'), JSON.stringify(fullRouter, null, '\t'))
-  fs.writeFileSync(path.join(__dirname, '/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
+  fs.writeFileSync(
+    path.join(__dirname, '/routes.json'),
+    JSON.stringify(fullRouter, null, '\t')
+  )
+  fs.writeFileSync(
+    path.join(__dirname, '/chido-routes.json'),
+    JSON.stringify(chidoRouter, null, '\t')
+  )
 }
 
 if (require.main === module) {

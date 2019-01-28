@@ -33,15 +33,17 @@ const tryPrefetch = to => {
 }
 
 export default function ChidoLink(fullprops) {
-  const {
-    to,
-    onClick,
-    onMouseEnter,
-    ...props
-  } = fullprops
+  const { to, onClick, onMouseEnter, onFocus, ...props } = fullprops
   return (
     <Link
       to={to}
+      onFocus={e => {
+        onFocus && onFocus(e)
+        const importFn = tryPrefetch(to)
+        if (importFn) {
+          universal(importFn).preload()
+        }
+      }}
       onMouseEnter={e => {
         onMouseEnter && onMouseEnter(e)
         const importFn = tryPrefetch(to)
@@ -52,21 +54,22 @@ export default function ChidoLink(fullprops) {
       onClick={event => {
         onClick && onClick(event)
         if (
-          event.button === 0// ignore right clicks
-          && !props.target // let browser handle "target=_blank"
-          && !event.defaultPrevented // onClick prevented default
-          && !event.metaKey // ignore clicks with modifier keys...
-          && !event.altKey
-          && !event.ctrlKey
-          && !event.shiftKey
+          event.button === 0 && // ignore right clicks
+          !props.target && // let browser handle "target=_blank"
+          !event.defaultPrevented && // onClick prevented default
+          !event.metaKey && // ignore clicks with modifier keys...
+          !event.altKey &&
+          !event.ctrlKey &&
+          !event.shiftKey
         ) {
           event.preventDefault()
           const importFn = tryPrefetch(to)
           if (importFn) {
             // What happen if the promise gets rejected?
-            universal(importFn).preload().then(() => navigate(to))
-          }
-          else {
+            universal(importFn)
+              .preload()
+              .then(() => navigate(to))
+          } else {
             navigate(to)
           }
         }
