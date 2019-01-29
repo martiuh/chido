@@ -22,7 +22,7 @@ function buildHybridRoutes() {
     if (!Page.prototype) {
       return null
     }
-    if (Page.prototype.render) {
+    if (Page.prototype.isReactComponent) {
       Component = new Page()
       Component = Component.render()
     }
@@ -60,7 +60,9 @@ function buildHybridRoutes() {
 
         const dotsPath = path
         const hasDots = startsWithDots(path)
-        currentRoute = finalSlash(currentRoute) ? currentRoute : `${currentRoute}/`
+        currentRoute = finalSlash(currentRoute)
+          ? currentRoute
+          : `${currentRoute}/`
         path = finalSlash(path) ? path : path.substr(0, path.length)
         path = hasDots ? `${path.substr(1)}` : path
         path = path === '/' ? '' : `${path}/`
@@ -87,14 +89,17 @@ function buildHybridRoutes() {
             routeObj = routeMaker(prop, currentRoute, routeObj, dina)
           })
         }
-
         else if (obj.props.path && !obj.props.children) {
           buildPath(obj.props.path)
         }
-
         else if (obj.props.path && obj.props.children) {
           buildPath(obj.props.path)
-          routeObj = routeMaker(obj.props, `${currentRoute}${obj.props.path}`, routeObj, dina)
+          routeObj = routeMaker(
+            obj.props,
+            `${currentRoute}${obj.props.path}`,
+            routeObj,
+            dina
+          )
         }
         else {
           routeObj = routeMaker(obj.props, currentRoute, routeObj, dina)
@@ -110,7 +115,9 @@ function buildHybridRoutes() {
       const dinaRouter = routeMaker(Component, routeName, {}, true)
 
       if (!componentRoutes[routeName]) {
-        fullRouter = Object.assign({}, fullRouter, { [noIndexRoute]: chunkName })
+        fullRouter = Object.assign({}, fullRouter, {
+          [noIndexRoute]: chunkName
+        })
       }
       else {
         chidoRouter = Object.assign({}, dinaRouter, chidoRouter)
@@ -120,8 +127,14 @@ function buildHybridRoutes() {
   })
 
   // remember this file is in the .app/routes directory
-  fs.writeFileSync(path.join(__dirname, '/routes.json'), JSON.stringify(fullRouter, null, '\t'))
-  fs.writeFileSync(path.join(__dirname, '/chido-routes.json'), JSON.stringify(chidoRouter, null, '\t'))
+  fs.writeFileSync(
+    path.join(__dirname, '/routes.json'),
+    JSON.stringify(fullRouter, null, '\t')
+  )
+  fs.writeFileSync(
+    path.join(__dirname, '/chido-routes.json'),
+    JSON.stringify(chidoRouter, null, '\t')
+  )
 }
 
 module.exports = buildHybridRoutes

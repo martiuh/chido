@@ -7,6 +7,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const fs = require('fs')
 const webpack = require('webpack')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const babelOptions = require('./babel-loader.options')
 
@@ -44,7 +45,7 @@ module.exports = function webpackShared(env, argv) {
       new webpack.DefinePlugin({
         STATIC: JSON.stringify(env === 'static')
       }),
-      new FriendlyErrorsWebpack()
+      new FriendlyErrorsPlugin()
     ]
   }
   return merge.smart(config, userConfig)

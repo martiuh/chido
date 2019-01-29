@@ -9,9 +9,7 @@ module.exports = function wireHtaccess() {
   const currentDir = process.cwd()
   let rawDynamic = fs.readFileSync(`${currentDir}/.app/routes/chido-routes.json`)
   rawDynamic = JSON.parse(rawDynamic.toString())
-  console.log(rawDynamic)
   const dynamicArr = Object.values(rawDynamic).filter(({ route }) => !!route)
-  console.log(Object.values(rawDynamic))
   const regexString = /[^/]{2,256}$/
   const lastRegexString = /[^/]{2,256}\/?$/
   const doubleDotRegex = /:[-a-zA-Z0-9@:%_+.~#?&=]*/
