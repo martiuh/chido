@@ -16,6 +16,7 @@ module.exports = function ChidoWebpack(env, argv) {
   const config = {
     mode: 'production',
     entry: path.join(process.cwd(), '/.app/build-static-html.js'),
+    target: 'node',
     output: {
       filename: '.chido__hidden.js',
       path: path.join(process.cwd(), '/public'),
@@ -43,6 +44,6 @@ module.exports = function ChidoWebpack(env, argv) {
   }
 
   const shared = sharedConfig(env, argv)
-  shared.module.rules = shared.module.rules.filter(({ test }) => String(test) !== String(/\.css$/))
+  // shared.module.rules = shared.module.rules.filter(({ test }) => String(test) !== String(/\.css$/))
   return webpackMerge.smart(shared, config, chidoShared)
 }

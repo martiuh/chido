@@ -30,7 +30,6 @@ module.exports = async function build(argv) {
 
     report.info('build routes from emitted file')
     const { buildRoutes } = require(`${currentDir}/.app/routes/buildRoutes`)
-    console.log(typeof buildRoutes)
     buildRoutes()
     report.success()
 

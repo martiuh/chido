@@ -7,23 +7,26 @@ const fs = require('fs')
 */
 module.exports = function wireHtaccess() {
   const currentDir = process.cwd()
-  let rawDynamic = fs.readFileSync(`${currentDir}/.app/routes/chido-routes.json`)
+  let rawDynamic = fs.readFileSync(
+    `${currentDir}/.app/routes/chido-routes.json`
+  )
   rawDynamic = JSON.parse(rawDynamic.toString())
   const dynamicArr = Object.values(rawDynamic).filter(({ route }) => !!route)
-  const regexString = /[^/]{2,256}$/
-  const lastRegexString = /[^/]{2,256}\/?$/
+  const regexString = '[^/]{2,256}$'
+  const lastRegexString = '[^/]{2,256}/?$'
   const doubleDotRegex = /:[-a-zA-Z0-9@:%_+.~#?&=]*/
   let validRoutes = []
   dynamicArr.forEach(({ route, directory }) => {
     let segments = route.split('/')
     segments = segments.map((segment, index) => {
       if (index === segments.length - 1) {
-        return segment.replace(doubleDotRegex, lastRegexString.toString())
+        return segment.replace(doubleDotRegex, lastRegexString)
       }
-      return segment.replace(doubleDotRegex, regexString.toString())
+      return segment.replace(doubleDotRegex, regexString)
     })
     segments = segments.join('/')
-    validRoutes = [...validRoutes,
+    validRoutes = [
+      ...validRoutes,
       `RewriteCond %{REQUEST_URI} !=^${segments}
       RewriteRule ${segments} /public/${directory} [L]`
     ]
