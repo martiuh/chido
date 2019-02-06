@@ -36,10 +36,7 @@ module.exports = function webpackShared(env, argv) {
       // No .css here please
     },
     resolve: {
-      extensions: ['.js', '.css', '.scss', '.sass', '.jsx'],
-      alias: {
-        'react-dom': '@hot-loader/react-dom'
-      }
+      extensions: ['.js', '.css', '.scss', '.sass', '.jsx']
     },
     plugins: [
       new webpack.DefinePlugin({

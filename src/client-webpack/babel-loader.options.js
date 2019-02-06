@@ -9,8 +9,7 @@ module.exports = () => {
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-transform-classes'
-    ],
-    env: { development: { plugins: ['react-hot-loader/babel'] } }
+    ]
   }
   return babelLoaderOptions
 }
