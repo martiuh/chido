@@ -1,0 +1,5 @@
+{
+	"ayuda/": "site--pages-ayuda-js",
+	"/": "site--pages-index-js",
+	"404/": "site--pages-404-js"
+}

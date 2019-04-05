@@ -8,10 +8,6 @@ export default function buildSyncRoute(obj, routeName, routeObj = null) {
     1. If it has props.path then it's a Router object meaning it's the mai.
     2. If it has props.children then it could have another Router underneath, making the component a 'parent'
   */
-  if (!obj) {
-    return null
-  }
-
   if (obj.children) {
     if (Array.isArray(obj.children)) {
       obj.children.forEach(child => {
