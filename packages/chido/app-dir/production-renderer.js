@@ -44,7 +44,6 @@ if (thePage && thePage.load) {
         routePath = chidoRoutes[routePath] ? `${routePath}*` : routePath
         const importFunction = asyncChunks[chunk]
         const AsyncRoute = universal(importFunction)
-        console.log({ importFunction })
         return <AsyncRoute path={routePath} key={chunk} />
       })}
     </Router>,
